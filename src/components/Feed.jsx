@@ -8,10 +8,13 @@ const Feed = () => {
     const[videos, setVideos] = useState([]);
 
     useEffect(() => {
-        setVideos(null);
-        
-        fetchFromAPI(`search?part=snippet&q=${selectedCategory}`)
-        .then((data) => setVideos(data.items));
+      fetchFromAPI(`search?part=snippet&q=${selectedCategory}`)
+        .then((data) => {
+          console.log('API Response:', data); 
+        if(data?.items) {
+          setVideos(data.items);
+        }
+      })
     }, [selectedCategory]); 
 
     return (
